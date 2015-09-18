@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2015 at 05:26 PM
+-- Generation Time: Sep 18, 2015 at 05:08 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `breedings` (
 --
 
 INSERT INTO `breedings` (`ID`, `Name`, `BreedingAbbrDef`, `Description`, `user_id`, `updated_at`, `created_at`) VALUES
-(1, 'test', 'test', '	test						\r\n						', 1, '2015-08-06', '2015-08-06'),
+(1, 'test', 'test', 'test                                                ', 1, '2015-08-06', '2015-08-06'),
 (2, 'zweite Zucht', 'test', 'test							\r\n						', 1, '2015-08-06', '2015-08-06'),
 (3, 'e', 'ts', 'tes', 2, '2015-08-04', '2015-08-05');
 
@@ -77,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `guinea pigs` (
 --
 
 INSERT INTO `guinea pigs` (`ID`, `Image`, `Name`, `BirthDate`, `breedingAbbr`, `Race`, `Color`, `DateOfDeath`, `Sexe`, `idLitter`, `id_breeding`, `updated_at`, `created_at`) VALUES
-(1, NULL, 'test', '30.03.1996', 'test', 'test', 'test', NULL, 1, 1, 1, '2015-08-06', '2015-08-06'),
-(2, NULL, 'Lenny', '30.03.1996', 'NHZ', 'test', 'test', NULL, 0, NULL, 1, '2015-08-07', '2015-08-07');
+(1, NULL, 'test', '30.03.1996', 'test', 'test', 'aA bB crC eE Pp rnrn Ss', NULL, 1, 1, 1, '2015-08-06', '2015-08-06'),
+(2, NULL, 'Lenny', '30.03.1996', 'NHZ', 'test', 'Aa bB cdcr Eep PP Rnrn SS', NULL, 0, NULL, 1, '2015-08-07', '2015-08-07');
 
 -- --------------------------------------------------------
 
@@ -142,18 +142,24 @@ CREATE TABLE IF NOT EXISTS `weight_guineapig` (
   `id_guineapig` int(11) NOT NULL,
   `Weight` decimal(10,2) NOT NULL,
   `DateOfWeighing` date NOT NULL,
+  `updated_at` date NOT NULL,
+  `created_at` date NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `IDGuineaPig` (`id_guineapig`),
   KEY `id_guineapig` (`id_guineapig`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `weight_guineapig`
 --
 
-INSERT INTO `weight_guineapig` (`ID`, `id_guineapig`, `Weight`, `DateOfWeighing`) VALUES
-(1, 1, '1.00', '2015-08-19'),
-(2, 1, '0.50', '2015-08-28');
+INSERT INTO `weight_guineapig` (`ID`, `id_guineapig`, `Weight`, `DateOfWeighing`, `updated_at`, `created_at`) VALUES
+(1, 1, '1.00', '2015-08-19', '0000-00-00', '0000-00-00'),
+(2, 1, '0.50', '2015-08-28', '0000-00-00', '0000-00-00'),
+(3, 1, '2.50', '2015-09-19', '2015-09-18', '2015-09-18'),
+(4, 1, '2.00', '2015-09-18', '2015-09-18', '2015-09-18'),
+(5, 1, '1.80', '2015-09-17', '2015-09-18', '2015-09-18'),
+(6, 2, '2.00', '2015-10-19', '2015-09-18', '2015-09-18');
 
 --
 -- Constraints for dumped tables
