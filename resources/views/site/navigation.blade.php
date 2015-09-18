@@ -26,6 +26,7 @@
 				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zucht administrieren<span class="caret"></span></a>
                   <ul class="dropdown-menu">
+					<li><a href="{{ route('breeding-overview') }}">Zuchtenübersicht</a></li>
 					<li><a href="{{ route('create-breeding') }}">Neue Zucht</a></li>
 					<hr>
 					@foreach ($breedings as $breeding)

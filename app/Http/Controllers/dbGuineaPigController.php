@@ -6,6 +6,7 @@ use View, Input, Redirect, Route, Validator;
 use App\User;
 use App\GuineaPig;
 use App\Breeding;
+use App\Weight;
 
 class dbGuineaPigController extends Controller {
 
@@ -40,7 +41,42 @@ class dbGuineaPigController extends Controller {
 	public static function delete(){
 	
 	}
+
+	public static function createWeighings(){
+		$weighings = array();
+		
+		$id_guineapig = Route::input('id');
+		$date = Input::get('date');
+		$weight = Input::get('weight');
+		
+		foreach($date as $dkey => $weightdate){
+			$weighing = self::buildWeighing($weightdate, $weight[$dkey], $id_guineapig);
+			array_push($weighings, $weighing);
+		}
+		
+		foreach($weighings as $wkey => $weighing){
+			if($weighing->getValidator()->fails()){
+				return Redirect::to('/guineapigs-overview/profile/' . $id_guineapig)->withErrors($guineapig->getValidator());
+			}
+		
+			if($weighing->save() == false){
+				return Redirect::to('/guineapigs-overview/profile/' . $id_guineapig)->with(array("title" => "Speichern fehlgeschlagen!", 
+																				"warning" => "Nicht alle Daten konnten gespeichert werden!", "id" => $id_guineapig));
+			}
+		}
+		
+		return Redirect::to('/guineapigs-overview/profile/' . $id_guineapig)->with(array('title' => 'Speichern erfolgreich', 
+																		'success' => 'Gewichtsdaten konnten gespeichert werden!'));
+	}
 	
+	public static function buildWeighing($date, $weight, $id_guineapig){
+		$weighing = new Weight();
+		$weighing->Weight = $weight;
+		$weighing->DateOfWeighing = $date;
+		$weighing->id_guineapig = $id_guineapig;
+		
+		return $weighing;
+	}
 	
 	public static function buildGuineaPig($guineapig){
 		$guineapig->name = Input::get('tbName');

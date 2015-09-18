@@ -41,7 +41,7 @@
 						<td>{{{ $wGP->breedingAbbr}}} {{{ $wGP->Name }}}</td>
 						<td>{{{ $wGP->BirthDate }}}</td>
 						<td>trächtig</td>
-						<td><a href="{{route('profile-guineapig')}}">...</a></td>
+						<td><a href="{{route('profile-guineapig')}}/{{{$wGP->ID}}}">...</a></td>
 					</tr>
 					@endforeach
 				@endif
@@ -69,7 +69,7 @@
 						<td>{{{ $mGP->breedingAbbr }}} {{{ $mGP->Name }}}</td>
 						<td>{{{ $mGP->BirthDate }}}</td>
 						<td>trächtig</td>
-						<td><a href="#">...</a></td>
+						<td><a href="{{route('profile-guineapig')}}/{{{$mGP->ID}}}">...</a></td>
 					</tr>
 					@endforeach
 				@endif

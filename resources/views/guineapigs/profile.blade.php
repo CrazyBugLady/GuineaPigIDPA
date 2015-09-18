@@ -9,10 +9,7 @@
 		<h2>Optionen</h2>
 		<div class="row">
 			<div class="form-group">
-				<div class="col-sm-6">
-					<a href="{{ route('create-weighing') }}/{{{ $selectedGP->ID }}}" id="createWeighing" class="btn btn-primary btn-lg btn-block">Neustes Gewicht eintragen</a>
-				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<a href="{{ route('sexe-change') }}/{{{ $selectedGP->ID }}}" id="updateGuineaPig" class="btn btn-primary btn-lg btn-block">Kastrieren lassen</a>
 				</div>
 			</div>
@@ -100,6 +97,8 @@
 		<hr>
 		
 		<h2>Wiegungen</h2>
+		<form method="post" action="{{ route('create-weighing') }}/{{{ $selectedGP->ID }}}">
+		{!! csrf_field() !!}
 		
 		<div class="row">
 			<div class="col-md-12">
@@ -114,8 +113,8 @@
 					@if(count($selectedGP->weighings) > 0)
 						@foreach($selectedGP->weighings as $weighing)
 						<tr>
-							<td><input type="date" class="form-control" name="date[]" id="date" placeholder="Wiegedatum Meerschweinchen" value="{{{$weighing->DateOfWeighing}}}"/></td>
-							<td><input type="number" class="form-control" name="weight[]" id="weight" placeholder="Gewicht Meerschweinchen" value="{{{$weighing->Weight}}}"/> kg</td>
+							<td>{{{$weighing->DateOfWeighing}}}</td>
+							<td>{{{$weighing->Weight}}} kg</td>
 						</tr>
 						@endforeach
 					@else
@@ -130,12 +129,13 @@
 							<td></td>
 							<td class="text-right">
 								<a href="#" id="btnAddWeighing" class="btn btn-warning">Hinzufügen</a>
-								<a href="{{ route('create-weighing') }}/{{{ $selectedGP->ID }}}" id="saveWeighings" class="btn btn-success">Speichern</a>
+								<input type="submit" id="saveWeighings" class="btn btn-success" value="Speichern">
 							</td>
 						</tr>
 					</tfoot>
 				</table>
 			</div>
 		</div>
+		</form>
 		
 @stop

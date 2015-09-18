@@ -109,14 +109,14 @@ Route::group(array('before' => 'auth'), function() {
 	);
 	Route::get('/guineapigs-overview/profile/castrate/{id}', 'vwGuineaPigController@castrate');
 	
-	Route::get(
+	Route::any(
 	'/guineapigs-overview/profile/weighings', 
 		[
-			"uses" => 'vwGuineaPigController@createWeighing',
+			"uses" => 'vwGuineaPigController@createWeighings',
 			"as" => 'create-weighing'
 		]
 	);
-	Route::get('/guineapigs-overview/profile/weighings/{id}', 'vwGuineaPigController@createWeighing');
+	Route::any('/guineapigs-overview/profile/weighings/{id}', 'dbGuineaPigController@createWeighings');
 	
 	
     Route::get('/guineapigs-overview/edit/{id}',   'GuineaPig\GuineaPigController@edit');

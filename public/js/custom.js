@@ -11,7 +11,7 @@
 			var tableWeighingsBody = $("#tblWeighings tbody");
 			tableWeighingsBody.append(	"<tr>"+
 											"<td><input type='date' class='form-control' name='date[]' id='date' placeholder='Wiegedatum Meerschweinchen'/></td>" +
-											"<td><input type='number' class='form-control' name='weight[]' id='weight' placeholder='Gewicht Meerschweinchen'/> kg</td>" +
+											"<td><input type='number' pattern='[0-9]+([\.|,][0-9]+)?' step='0.01' class='form-control' name='weight[]' id='weight' placeholder='Gewicht Meerschweinchen'/> kg</td>" +
 										"</tr>");
 		});
 	
