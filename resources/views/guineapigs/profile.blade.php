@@ -31,7 +31,7 @@
 				Geburtsdatum
 			</div>
 			<div class="col-md-6">
-				{{{$selectedGP->BirthDate}}}
+				{{{$selectedGP->BirthDate}}} ( {{{$selectedGP->getAge()}}} )
 			</div>
 		</div>
 		

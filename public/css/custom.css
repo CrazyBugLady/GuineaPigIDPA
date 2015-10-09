@@ -16,7 +16,20 @@ body > .container {
   margin: 20px 0;
 }
 
+.container .information {
+	margin-top: 300px;
+	padding-top: 100px;
+}
+
 #footer > .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+
+.good-weight{
+	color: green;
+}
+
+.bad-weight{
+	color: red;
 }

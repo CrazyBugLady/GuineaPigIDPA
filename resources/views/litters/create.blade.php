@@ -45,13 +45,13 @@
 				<div class="row">
 					<div class="col-md-12">	
 						<div class="col-md-6 text-center">
-							<span id="spRaceM">Rasse</span>
-							<span id="spColorM">Farbe</span>
+							<span id="spRaceM">Rasse</span><br>
+							<span id="spColorM">Farbe</span><br>
 							<span id="spAgeM">Alter</span>
 						</div>
 						<div class="col-md-6 text-center">
-							<span id="spRaceW">Rasse</span>
-							<span id="spColorW">Farbe</span>
+							<span id="spRaceW">Rasse</span><br>
+							<span id="spColorW">Farbe</span><br>
 							<span id="spAgeW">Alter</span>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 		
 		<hr>
 		
-		<h2>Erwarteter Wurf</h2>
+		<h2 id="hLitter">Erwarteter Wurf</h2>
 		
 		<div class="row">
 			<div class="col-md-12">	
@@ -104,63 +104,21 @@
 			</div>
 		</div>
 		
-		<!---
-		<h3>Wahrscheinlichkeiten <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Deckungsfaktor" data-content="Ist das Meerschweinchen gescheckt? Zeigt sich nur eine der beiden Farbreihen?"></span></h3>
+		<h2 id="hLitterParams">Wahrscheinlichste Wurfparameter</h2>
+		
 		<div class="row">
-			<div class="col-md-12">	
-				<table class="table table-striped">
-					<tr>
-						<th colspan="2">Wahrscheinlichkeit</th>
-						<th>Wurfgrösse</th>
-					</tr>
-					<tr>
-						<td colspan="2">20%</td>
-						<td>2</td>
-					</tr>
-					<tr>
-						<th>Wahrscheinlichkeit</th>
-						<th>Zuchtcode</th>
-						<th>Bezeichnung</th>
-					<tr>
-					<tr>
-						<td>25%</td>
-						<td>BB CC EE PP ss</td>
-						<td>BB CC EE PP ss</td>
-					</tr>
-					<tr>
-						<td>25%</td>
-						<td>BB CC EE PP ss</td>
-						<td>BB CC EE PP ss</td>
-					</tr>
-					<tr>
-						<td>25%</td>
-						<td>BB CC EE PP ss</td>
-						<td>BB CC EE PP ss</td>
-					</tr>
-					<tr>
-						<td>25%</td>
-						<td>BB CC EE PP ss</td>
-						<td>BB CC EE PP ss</td>
-					</tr>
+			<div class="col-md-12">
+				<table class="table table-striped" id="tblLitterParams">
+					<thead>
+						<th>Anzahl Junge</th>
+						<th>Tragzeit</th>
+						<th>Geschlechterverteilung</th>
+					</thead>
+					<tbody>
+						
+					</tbody>
 				</table>
 			</div>
 		</div>
 		
-		<h3>Wahrscheinlichster Wurf</h3>
-		<div class="row">
-			<div class="col-md-12">	
-				<table class="table table-striped">
-					<tr>
-						<th>Junges #1</th>
-						<th>Junges #2</th>
-						<th>Junges #3</th>
-					</tr>
-					<tr>
-						<td>BB CC EE PP ss</td>
-						<td>BB CC EE PP ss</td>
-						<td>BB CC EE PP ss</td>
-					</tr>
-				</table>
-			</div>
-		</div>--->
 @stop

@@ -12,6 +12,8 @@
 */
 
 Route::pattern('id', '[0-9]+');
+Route::pattern('wId', '[0-9]+');
+Route::pattern('mId', '[0-9]+');
 
 Route::get('', 
 	[
@@ -60,6 +62,22 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 Route::group(array('before' => 'auth'), function() {
+	Route::get(
+		'/guineapigs-overview/racebook',
+		[
+			"uses" => 'vwGuineaPigController@racebook',
+			"as" => 'guineapig-racebook'
+		]
+	);
+	
+	Route::get(
+		'/guineapigs-overview/colorbook',
+		[
+			"uses" => 'vwGuineaPigController@colorbook',
+			"as" => 'guineapig-colorbook'
+		]
+	);
+
     Route::get(
 	
 	'/guineapigs-overview', 
@@ -122,7 +140,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('/guineapigs-overview/edit/{id}',   'GuineaPig\GuineaPigController@edit');
     Route::get('/guineapigs-overview/delete/{id}', 'GuineaPig\GuineaPigController@delete');
     
-    Route::post('/guineapigs-overview/create/{id}',      'dbGuineaPigController@create');
+    Route::post('/guineapigs-overview/create/{id}', 'dbGuineaPigController@create');
     Route::post('api/guineapigs-overview/{id}', 'GuineaPig\ApiGuineaPigController@update');
     Route::delete('api/guineapigs-overview/{id}', 'GuineaPig\ApiGuineaPigController@delete');
 });

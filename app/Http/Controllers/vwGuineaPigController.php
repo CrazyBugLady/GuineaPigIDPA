@@ -8,6 +8,7 @@ use View, Input, Redirect, Route, Validator;
 use App\User;
 use App\GuineaPig;
 use App\Breeding;
+use DB;
 
 class vwGuineaPigController extends Controller {
 	public function index() {
@@ -66,6 +67,22 @@ class vwGuineaPigController extends Controller {
 		$selectedGP = GuineaPig::find($id);
 		// TODO: generate error when not selecting an id and redirect to breedings overview
 		return View::make('guineapigs.profile', array('selectedGP' => $selectedGP));
+	}
+	
+	public function racebook(){
+		$combinations = DB::table('combinations')					
+						->where('CombinationType', "Race")
+						->get();
+					
+		return View::make('guineapigs.race_color', array("book" => "Rassebuch", "booktitletwo" => "Mögliche Rassen", "combinations" => $combinations));
+	}
+	
+	public function colorbook(){
+		$combinations = DB::table('combinations')					
+						->where('CombinationType', "Color")
+						->get();
+						
+		return View::make('guineapigs.race_color', array("book" => "Farbenbuch", "booktitletwo" => "Mögliche Farben", "combinations" => $combinations));
 	}
 }
 

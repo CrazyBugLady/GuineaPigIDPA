@@ -96,12 +96,17 @@
 						<input type="radio" class="form-control" name="optionHaar" id="cbKurzhaar" value="kurzhaar" checked>
 					</div>
 					<div class="col-sm-6">
-						<select class="form-control">
+						<select class="form-control" id="ddlShortHair">
 							<option>Am. Crested</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
+							<option>Glatthaar</option>
+							<option>Rosetten</option>
+							<option>Rex</option>
+							<option>US-Teddy</option>
+							<option>CH-Teddy</option>
+							<option>Curly</option>
+							<option>Angora</option>
+							<option>Sheba Mini Yak</option>
+							<option>Minipli</option>
 						</select>
 					</div>
 			</div>
@@ -114,12 +119,15 @@
 					<input type="radio" class="form-control" name="optionHaar" id="cbLanghaar" value="langhaar" checked>
 				</div>
 				<div class="col-sm-6">
-					<select class="form-control">
+					<select class="form-control" id="ddLongHair">
 						<option>Texel</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
+						<option>Sheltie</option>
+						<option>Coronet</option>
+						<option>Peruaner</option>
+						<option>Merino</option>
+						<option>Alpaka</option>
+						<option>Lunkarya</option>
+						<option>Merino</option>
 					</select>
 				</div>
 			</div>
@@ -133,8 +141,8 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control" id="ddlHaarlos">
-						<option>Skinny</option>
-						<option>Baldwin</option>
+						<option value="sksk">Skinny</option>
+						<option value="bdbd">Baldwin</option>
 					</select>
 				</div>
 			</div>
@@ -145,13 +153,13 @@
 				<label class="col-sm-3 control-label">Satin <span class="glyphicon glyphicon-question-sign"></span></label>
 				<div class="col-sm-9 text-center">
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> nein
+						<input type="radio" name="rdSatin" id="optionSatin1" value="optionSatinNo"> nein
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Satin
+						<input type="radio" name="rdSatin" id="optionSatin2" value="optionSatinYes"> Satin
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Satin-Träger
+						<input type="radio" name="rdSatin" id="optionSatin3" value="optionSatinMaybeLater"> Satin-Träger
 					</label>
 				</div>
 			</div>
@@ -214,12 +222,12 @@
 					</div>
 					<div class="col-sm-3">
 						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox2" value="option2"> Skinny-Träger
+							<input type="checkbox" id="cbskTraeger" value="skTraeger"> Skinny-Träger
 						</label>
 					</div>
 					<div class="col-sm-3">
 						<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox3" value="option3"> Baldwin-Träger
+							<input type="checkbox" id="cbBdTraeger" value="bdTraeger"> Baldwin-Träger
 						</label>
 					</div>
 				</div>

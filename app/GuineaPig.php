@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Validator;
 use App\Weight;
+use DateTime;
 
 class GuineaPig extends Model {
 
@@ -54,6 +55,15 @@ class GuineaPig extends Model {
 		{
 			return $this->weighings()->first()->Weight;
 		}
+	}
+	
+	public function getAge(){
+		$birthdate = new DateTime($this->BirthDate); //Geburtsdatum
+		$currentdate = new DateTime(date('Y')+'-'+date('m')+'-'+date('d')); //Aktuelles Datum
+ 
+		$age = $currentdate->diff($birthdate);
+		
+		return $age->format("%Y");
 	}
  
 		
@@ -119,6 +129,7 @@ class GuineaPig extends Model {
 		$GP = array();
 		$GP["race"] = $this->Race;
 		$GP["color"] = $this->Color;
+		$GP["age"] = $this->getAge();
 		
 		return $GP;
 	}

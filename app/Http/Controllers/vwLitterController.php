@@ -34,10 +34,9 @@ class vwLitterController extends Controller {
 	}
 	
 	public function generatePossibleLitter(Request $request){
-		$maennchen = GuineaPig::find(1);
-		$weibchen = GuineaPig::find(2);
+		$maennchen = GuineaPig::find(Input::get("idM"));
+		$weibchen = GuineaPig::find(Input::get("idW"));
 
-		
 		$CombinationsLitter_color = array();
 		
 		$Colorparts_W = $weibchen->getColorParts();
@@ -55,7 +54,8 @@ class vwLitterController extends Controller {
 		}
 		
 		$Litter = array();
-		$litter_count = rand(1, 4);
+		$litter_count = rand(1,4);
+				
 		/*$count_f = 0; // wie viele Weibchen
 		$count_m = 0; // wie viele Männchen*/
 		
@@ -80,7 +80,7 @@ class vwLitterController extends Controller {
 			
 			}
 			$GuineaPig["color"] = $Parts[0] . " " . $Parts[1] . " " . $Parts[2] . " " . $Parts[3] . " " . $Parts[4] . " " . $Parts[5] . " " . $Parts[6];
-			$GuineaPig["race"] = "Jewish";
+			$GuineaPig["race"] = "Test";
 			
 			array_push($Litter, $GuineaPig);
 		}
