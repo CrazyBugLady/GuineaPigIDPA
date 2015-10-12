@@ -238,7 +238,7 @@
 				
 		<div class="row">
 			<div class="form-group">
-				<label for="tbFarbformel" class="col-sm-3 control-label">Farbformel <span class="glyphicon glyphicon-question-sign"></span></label>
+				<label for="tbFarbformel" class="col-sm-3 control-label">Farbformel <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Farbformel" data-content="In der Zucht verwendete Formel zur Darstellung der Allelzusammenstellung einer Farbgattung."></span></label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" name="tbFarbformel" id="tbFarbformel" placeholder="Farbformel"/>
 					</div>
@@ -247,15 +247,29 @@
 		
 		<div class="row">
 			<div class="form-group">
-				<label for="cbAgouti" class="col-sm-3 control-label">Agouti <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Deckungsfaktor" data-content=""></span></label>
+				<input type="radio" name="Farbschlag" value="argente"> Argente <br> 
+				<input type="radio" name="Farbschlag" value="agouti"> Agouti <br> 
+				<input type="radio" name="Farbschlag" value="tanfox"> Tan/Fox <br> 
+				<input type="radio" name="Farbschlag" value="zeichnung"> Zeichnungen <br> 
+				<input type="radio" name="Farbschlag" value="einfarbig"> Einfarbig <br> 
+				<input type="radio" name="Farbschlag" value="solid"> Solid <br> 
+				<input type="radio" name="Farbschlag" value="dapple"> Dapple <br> 
+			</div>
+		</div>
+		
+		
+		
+		<div class="row">
+			<div class="form-group">
+				<label for="cbAgouti" class="col-sm-3 control-label">Agouti <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Agouti" data-content=""></span></label>
 				<div class="col-sm-3">
 					<input type="checkbox" class="form-control" id="cbAgouti" value="agouti" checked>
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control" id="ddlAgouti">
-						<option value="A">agouti/argente</option>
-						<option value="ar">solid agouti</option>
-						<option value="at">lohfarben</option>
+						<option value="0">agouti/argente</option>
+						<option value="1">solid agouti</option>
+						<option value="2">lohfarben</option>
 					</select>
 				</div>
 			</div>
@@ -266,11 +280,15 @@
 				<label for="ddlRotreihe" class="col-sm-3 control-label">Rotreihe <span class="glyphicon glyphicon-question-sign"></span></label>
 					<div class="col-sm-9" id="ddlRotreihe">
 						<select class="form-control">
-							<option>rot/gold</option>
-							<option>buff</option>
-							<option>safran</option>
-							<option>creme</option>
-							<option>weiss</option>
+							<option value="0">gold r.e</option>
+							<option value="1">gold d.e</option>
+							<option value="2">rot</option>
+							<option value="3">buff</option>
+							<option value="4">safran</option>
+							<option value="5">creme r.e</option>
+							<option value="6">creme d.e</option>
+							<option value="7">weiss r.e</option>
+							<option value="8">weiss d.e</option>
 						</select>
 					</div>
 			</div>
@@ -281,12 +299,12 @@
 				<label for="ddlSchwarzreihe" class="col-sm-3 control-label">Schwarzreihe <span class="glyphicon glyphicon-question-sign"></span></label>
 					<div class="col-sm-9" id="ddlSchwarzreihe">
 						<select class="form-control">
-							<option>beige</option>
-							<option>lilac</option>
-							<option>coffee</option>
-							<option>slateblue</option>
-							<option value="bb">schoko</option>
-							<option value="BB CC">schwarz</option>
+							<option value='0'>Beige</option>
+							<option value='1'>Lilac</option>
+							<option value='2'>Coffee</option>
+							<option value='3'>Slate Blue</option>
+							<option value='4'>Schokolade</option>
+							<option value='5'>Schwarz</option>
 						</select>
 					</div>
 			</div>
@@ -296,10 +314,10 @@
 			<div class="form-group">
 				<label for="ddlScheckung" class="col-sm-3 control-label">Deckungsfaktor <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Deckungsfaktor" data-content="Ist das Meerschweinchen gescheckt? Zeigt sich nur eine der beiden Farbreihen?"></span></label>
 					<div class="col-sm-9">
-						<select class="form-control">
-							<option value="ep">gescheckt</option>
-							<option value="E">keine Rotreihe</option>
-							<option value="ee">keine Schwarzreihe</option>
+						<select class="form-control" id="ddlE">
+							<option value='0'>gescheckt</option>
+							<option value='1'>keine Rotreihe</option>
+							<option value='2'>keine Schwarzreihe</option>
 						</select>
 					</div>
 			</div>

@@ -89,40 +89,44 @@ class GuineaPig extends Model {
 	}
 	
 	public function getRaceParts(){
-		
+		return $this->getParts($this->Race);
 	}
 	
 	public function getColorParts(){
-		$Colorparts = explode(" ", $this->Color);
+		return $this->getParts($this->Color);
+	}
+	
+	public function getParts($Parts){
+		$Parts = explode(" ", $Parts);
 		
-		$Color = array();
-		foreach($Colorparts as $CP){
-			$Parts = array();
-			switch(strlen($CP)){
+		$Property = array();
+		foreach($Parts as $P){
+			$PartsNew = array();
+			switch(strlen($P)){
 				case 2:
-					array_push($Parts, substr($CP, 0, -1));
-					array_push($Parts, substr($CP, -1));
+					array_push($PartsNew, substr($P, 0, -1));
+					array_push($PartsNew, substr($P, -1));
 					break;
 				case 3:
-					if(preg_match("/^[A-Z]$/", substr($CP, 0, 1)) == false){
-						array_push($Parts, substr($CP, 0, -1));
-						array_push($Parts, substr($CP, -1));
+					if(preg_match("/^[A-Z]$/", substr($P, 0, 1)) == false){
+						array_push($PartsNew, substr($P, 0, -1));
+						array_push($PartsNew, substr($P, -1));
 					}
 					else // zweites und drittes Zeichen klein
 					{
-						array_push($Parts, substr($CP, 0, 1));
-						array_push($Parts, substr($CP, -2));
+						array_push($PartsNew, substr($P, 0, 1));
+						array_push($PartsNew, substr($P, -2));
 					}
 					break;
 				case 4:
-						array_push($Parts, substr($CP, 0, 2));
-						array_push($Parts, substr($CP, -2));
+						array_push($PartsNew, substr($P, 0, 2));
+						array_push($PartsNew, substr($P, -2));
 					break;
 			}
-			array_push($Color, $Parts);
+			array_push($Property, $PartsNew);
 		}
 		
-		return $Color;
+		return $Property;
 	}
 	
 	public function getGP(){

@@ -91,11 +91,24 @@
 		
 		<div class="row">
 			<div class="col-md-12">	
-				<table class="table table-striped" id="tblLitter">
+				<table class="table table-striped" id="tblLitterColor">
 					<thead>
-						<th>Junges</th>
-						<th>Farbe</th>
-						<th>Rasse</th>
+						<th>Wahrscheinlichkeit</th>
+						<th width="50%">Farbe</th>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">	
+				<table class="table table-striped" id="tblLitterRace">
+					<thead>
+						<th>Wahrscheinlichkeit</th>
+						<th width="50%">Rasse</th>
 					</thead>
 					<tbody>
 						
