@@ -7,7 +7,7 @@ class Litter extends Model {
     // Relations
 	protected $table = 'litter';
 	
-	 protected $fillable = ['startdate, expectedLitterDate', 'IDMotherGP', 'IDFatherGP'];
+	 protected $fillable = ['startdate, expectedLitterDate', 'AmountBabies', 'PercentageFemale', 'Title', 'Further_Information', 'IDMotherGP', 'IDFatherGP'];
 	
     public function MotherGuineaPig() {
         return DB::table('guinea pigs')
