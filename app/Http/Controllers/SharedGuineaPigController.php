@@ -39,10 +39,10 @@ abstract class SharedGuineaPigController extends Controller
 					foreach($CodeCompare as $CCKey => $CCPart){
 						$PartsCodeToCompare = self::getParts($combination->Description);
 						$PartsCodeToGet = self::getParts($code);
-						
+
 						foreach($PartsCodeToCompare as $PartIndex => $Part){
 							$PartToGet = $PartsCodeToGet[$PartIndex];
-							if(($Part[0] == $PartToGet[0] and $Part[1] == $PartToGet[1]) or ($Part[0] == "?" and $Part[1] == $PartToGet[1]) or ($Part[1] == "?" and $Part[0] == $PartToGet[0]))
+							if(($Part[0] == "?" and $Part[1] == "?") or ($Part[0] == $PartToGet[0] and $Part[1] == $PartToGet[1]) or ($Part[0] == "?" and $Part[1] == $PartToGet[1]) or ($Part[1] == "?" and $Part[0] == $PartToGet[0]))
 							{
 								if($PartIndex == count($PartsCodeToCompare) - 1) // there was no mistake up until now so this might be the right formula... yay
 								{

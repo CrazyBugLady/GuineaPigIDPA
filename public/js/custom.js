@@ -52,9 +52,10 @@
 						agefield.html(item.age);
 					});
 					
-					if (colorfield.html().indexOf("Rn") >= 0 && colorfieldoppositegender.html().indexOf("Rn") >= 0){
+					if ((colorfield.html().indexOf("Dalmatiner") >= 0 || colorfield.html().indexOf("Schimmel") >= 0) && colorfieldoppositegender.html().indexOf("Dalmatiner") >= 0 || colorfieldoppositegender.html().indexOf("Schimmel") >= 0){
 						$('#warningLetalFactor').show("slow");
-					}else
+					}
+					else
 					{
 						$('#warningLetalFactor').hide();
 					}

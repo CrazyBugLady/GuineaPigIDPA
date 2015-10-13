@@ -107,8 +107,20 @@ class vwLitterController extends ControllerShared {
 					$PartProperty[$CombinationKey] = strtoupper($Combination);
 				}				
 				if(preg_match('/[a-z]{2}[A-Z]{1}[a-z]{1}/', $Combination) and strlen($Combination) == 4 and ctype_upper(substr($Combination, 0, 1)) == false){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
-					$PartProperty[$CombinationKey] = substr($Combination, -2) . substr($Combination, 0, 2);
+					if($Combination == "rnRn")
+					{
+						$PartProperty[$CombinationKey] = substr($Combination, -2) . substr($Combination, 0, 2);
+					}
+					else
+					{
+						$PartProperty[$CombinationKey] = substr($Combination, -2) . substr($Combination, -2); //substr($Combination, 0, 2);
+					}
 				}
+				
+				if(strlen($Combination) == 4 and ctype_upper(substr($Combination, 0, 1)) == true){
+					$PartProperty[$CombinationKey] = substr($Combination, 0, 2) . substr($Combination, 0, 2);
+				}
+				
 				if(preg_match('/[a-z]{2}[A-Z]{1}/', $Combination) and strlen($Combination) == 3){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
 					$PartProperty[$CombinationKey] = substr($Combination, -1) . substr($Combination, -1);//. substr($Combination, 0, 2);
 				}
