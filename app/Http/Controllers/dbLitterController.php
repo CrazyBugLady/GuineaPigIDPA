@@ -34,13 +34,17 @@ class dbLitterController extends ControllerShared {
 	
 	}
 	
-	public static function buildWeighing($date, $weight, $id_guineapig){
-		$weighing = new Weight();
-		$weighing->Weight = $weight;
-		$weighing->DateOfWeighing = $date;
-		$weighing->id_guineapig = $id_guineapig;
+	public static function buildWeighing($expectedlitterdate, $startdate, $further_informations, $percentagefemale, $amountbabies, $title, $idmother, $idfather){
+		$litter = new Litter();
+		$litter->expectedLitterDate = $expectedlitterdate;
+		$litter->AmountBabies = $amountbabies;
+		$litter->Further_Information = $further_informations;
+		$litter->PercentageFemale = $percentagefemale;
+		$litter->IDMotherGP = $expectedlitterdate;
+		$litter->IDFatherGP = $amountbabies;
+		$litter->Title = $title;
 		
-		return $weighing;
+		return $litter;
 	}
 	
 }
