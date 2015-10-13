@@ -140,7 +140,16 @@
 			$("#tblLitterParams tbody > tr").remove();
 			var age = parseFloat(agefield.html());
 			var lettersize = "0";
+			var earliestdate = 68;
 			var gestationperiod = 80; // ca. 80 Tage, liegt zwischen dem Mittelwert und dem häufigsten Wert
+			
+			var Today = new Date();
+			var earliestLitterDate = new Date();
+			var possibleLitterDate = new Date();
+			var msperDay = 86400000;
+
+			earliestLitterDate.setTime(Today.getTime() + earliestdate * msperDay);
+			possibleLitterDate.setTime(Today.getTime() + gestationperiod * msperDay);
 			
 			if(age < 1)
 			{
@@ -159,7 +168,8 @@
 			
 			$("#tblLitterParams tbody").append("<tr>" +
 												"<td>"+ lettersize + "</td>" +
-												"<td>"+ gestationperiod + "</td>" +
+												"<td>"+ earliestLitterDate.getDate() + "." + (earliestLitterDate.getMonth() + 1) + "." + earliestLitterDate.getFullYear() + "</td>" +
+												"<td>"+ possibleLitterDate.getDate() + "." + (possibleLitterDate.getMonth() + 1) + "." + possibleLitterDate.getFullYear() + "</td>" +
 												"<td>1:1</td>" +
 												"</tr>");
 												

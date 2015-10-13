@@ -63,7 +63,7 @@ class GuineaPig extends Model {
  
 		$age = $currentdate->diff($birthdate);
 		
-		return $age->format("%Y");
+		return $age->format("%y.%m");
 	}
  
 		
@@ -87,7 +87,7 @@ class GuineaPig extends Model {
 	public function isInCalf(){
 		return ($this->currentLitter() != null and $this->Sexe == 1);
 	}
-	
+/*	
 	public function getRaceParts(){
 		return $this->getParts($this->Race);
 	}
@@ -95,40 +95,9 @@ class GuineaPig extends Model {
 	public function getColorParts(){
 		return $this->getParts($this->Color);
 	}
+	*/
 	
-	public function getParts($Parts){
-		$Parts = explode(" ", $Parts);
-		
-		$Property = array();
-		foreach($Parts as $P){
-			$PartsNew = array();
-			switch(strlen($P)){
-				case 2:
-					array_push($PartsNew, substr($P, 0, -1));
-					array_push($PartsNew, substr($P, -1));
-					break;
-				case 3:
-					if(preg_match("/^[A-Z]$/", substr($P, 0, 1)) == false){
-						array_push($PartsNew, substr($P, 0, -1));
-						array_push($PartsNew, substr($P, -1));
-					}
-					else // zweites und drittes Zeichen klein
-					{
-						array_push($PartsNew, substr($P, 0, 1));
-						array_push($PartsNew, substr($P, -2));
-					}
-					break;
-				case 4:
-						array_push($PartsNew, substr($P, 0, 2));
-						array_push($PartsNew, substr($P, -2));
-					break;
-			}
-			array_push($Property, $PartsNew);
-		}
-		
-		return $Property;
-	}
-	
+	/*
 	public function getGP(){
 		$GP = array();
 		$GP["race"] = $this->Race;
@@ -136,7 +105,7 @@ class GuineaPig extends Model {
 		$GP["age"] = $this->getAge();
 		
 		return $GP;
-	}
+	}*/
  
 	// Methods
     public function getValidator() {

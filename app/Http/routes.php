@@ -146,23 +146,20 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 Route::group(array('before' => 'auth'), function() {
-    Route::get('/litter-overview', 
-		[
-			"uses" => 'vwLitterController@index',
-			"as" => 'litter-overview'
-		]
-	);
+
+	 Route::get(
 	
-	Route::get('/litter-overview/create', 
+	'/litter-overview/create/', 
 		[
 			"uses" => 'vwLitterController@create',
 			"as" => 'create-litter'
 		]
 	);
-	Route::post('/litter-overview/generate', 'vwLitterController@generatePossibleLitter');
+    Route::get('/litter-overview/create/{id}', 'vwLitterController@create');
+    Route::post('/litter-overview/create/{id}', 'dbLitterController@create');
+	
+	Route::get('/litter-overview/generate', 'vwLitterController@generatePossibleLitter');
 	Route::get('/litter-overview/generate', "vwLitterController@generatePossibleLitter");
-	
-	Route::get('/litter-overview/create/{id}', 'vwLitterController@create');
-	Route::post('/litter-overview/create/{id}', 'dbLitterController@create');
 });
-	
+
+?>	

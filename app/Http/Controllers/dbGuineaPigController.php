@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller as Controller;
+use App\Http\Controllers\SharedGuineaPigController as ControllerShared;
 use Illuminate\Http\Request;
 use View, Input, Redirect, Route, Validator;
 use App\User;
@@ -8,7 +8,7 @@ use App\GuineaPig;
 use App\Breeding;
 use App\Weight;
 
-class dbGuineaPigController extends Controller {
+class dbGuineaPigController extends ControllerShared {
 
 	public static function create(){
 		$guineapig = self::buildGuineaPig(new GuineaPig());
@@ -28,10 +28,21 @@ class dbGuineaPigController extends Controller {
 	public static function data(){
 		$idGuineaPig = Route::Input('id');
 		$Guineapig = GuineaPig::find($idGuineaPig);
-		$GP = array();
-		array_push($GP, $Guineapig->getGP());
+		
+		$Guineapig = self::buildJsonGP($Guineapig);
+		
+		//array_push($Guineapig, $GP);//$Guineapig->getGP());
 	
-		return json_encode($GP);
+		return json_encode(array($Guineapig));
+	}
+	
+	private static function buildJsonGP($gp){
+		$GP = array();
+		$GP["race"] = self::findDescription("Race", $gp->Race);
+		$GP["color"] = self::findDescription("Color", $gp->Color);
+		$GP["age"] = $gp->getAge();
+		
+		return $GP;
 	}
 	
 	public static function update(){

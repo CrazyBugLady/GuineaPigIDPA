@@ -124,7 +124,8 @@
 				<table class="table table-striped" id="tblLitterParams">
 					<thead>
 						<th>Anzahl Junge</th>
-						<th>Tragzeit</th>
+						<th>frühstes Wurfdatum</th>
+						<th>wahrscheinlichster Wurftermin</th>
 						<th>Geschlechterverteilung</th>
 					</thead>
 					<tbody>
