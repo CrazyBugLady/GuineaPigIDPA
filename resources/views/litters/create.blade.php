@@ -61,14 +61,11 @@
 				
 				<div class="row">
 					<div class="form-group">
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<button id="btnCreateWurfTemp" class="btn btn-warning btn-lg btn-block">Wurf Vorschau</button>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<button id="btnCreateWurf" class="btn btn-success btn-lg btn-block">Verpaarung erstellen</button>
-						</div>
-						<div class="col-sm-4">
-							<!--<input type="reset" id="cancelCreate" class="btn btn-danger btn-lg btn-block" value="Abbrechen">-->
 						</div>
 					</div>
 				</div>
@@ -106,7 +103,7 @@
 										</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-9 text-right">
+									<div class="col-sm-12 text-right">
 										<input type="submit" class="btn btn-success btn-lg btn-block" name="btnCreateFinish" id="btnCreateFinish" value="Verpaarung bestätigen">
 									</div>
 								</div>

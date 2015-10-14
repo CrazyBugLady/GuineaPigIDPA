@@ -38,11 +38,15 @@
 		
 		$("#ddlWeibchen").change(function(){
 			getDataWeibchen();
+			cancelCreating();
+			createWurfTemp();
 			$('#divCreate').hide();
 		});
 		
 		$("#ddlMaennchen").change(function(){
 			getDataMaennchen();
+			cancelCreating();
+			createWurfTemp();
 			$('#divCreate').hide();
 		});
 		
@@ -164,8 +168,8 @@
 			
 			$("#tblLitterParams tbody").append("<tr>" +
 												"<td>"+ lettersize + "</td>" +
-												"<td>"+ earliestdate + "</td>" +
-												"<td>"+ expectedlitterdate+ "</td>" +
+												"<td>"+ earliestperiod + "</td>" +
+												"<td>"+ expectedlitterperiod + "</td>" +
 												"<td>1:1</td>" +
 												"</tr>");
 												
@@ -197,24 +201,41 @@
 			var strStartdateDefault = startdateDefault.getDate() + "." + (startdateDefault.getMonth() + 1) + "." + startdateDefault.getFullYear()
 			$("#tbStartdate").val(strStartdateDefault);
 			setUpDates(strStartdateDefault);
-			//setUpDates($("#tbStartdate").val());
+			$("#btnCreateWurf").text("Verpaarung abbrechen");
+			$("#btnCreateWurf").addClass("btn-danger");
+			$("#btnCreateWurf").removeClass("btn-success");
 		}
 		
 		function cancelCreating(){
-			$('#divCreate').hide();
+			$('#divCreate').hide("slow");
+			
+		
+			$("#btnCreateWurf").text("Verpaarung erstellen");
+			$("#btnCreateWurf").addClass("btn-success");
+			$("#btnCreateWurf").removeClass("btn-danger");
+		}
+		
+		function createWurfTemp(){
+			generatePossibleLitterColor($("#ddlWeibchen").val(), $("#ddlMaennchen").val());
+			generatePossibleLitterRace($("#ddlWeibchen").val(), $("#ddlMaennchen").val());
+			generatePossibleLitterParams($("#spAgeW"));
 		}
 		
 		$("#btnCreateWurfTemp").on('click', function(e){
 			e.preventDefault();
-			generatePossibleLitterColor($("#ddlWeibchen").val(), $("#ddlMaennchen").val());
-			generatePossibleLitterRace($("#ddlWeibchen").val(), $("#ddlMaennchen").val());
-			generatePossibleLitterParams($("#spAgeW"));
+			createWurfTemp();
 			cancelCreating();
 			
 		});
-		
 		$("#btnCreateWurf").on('click', function(e){
 			e.preventDefault();
-			setUpFormForCreating();
+			if($("#divCreate").is(':visible') == false){
+				setUpFormForCreating();
+			}
+			else
+			{
+				cancelCreating();
+			}
+			
 		});
 	});
