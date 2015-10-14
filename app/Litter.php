@@ -7,7 +7,7 @@ class Litter extends Model {
     // Relations
 	protected $table = 'litter';
 	
-	 protected $fillable = ['startdate, expectedLitterDate', 'AmountBabies', 'PercentageFemale', 'Title', 'Further_Information', 'IDMotherGP', 'IDFatherGP'];
+	 protected $fillable = ['startdate, expectedLitterDate', 'earliestLitterdate', 'realLitterdate', 'Title', 'IDMotherGP', 'IDFatherGP'];
 	
     public function MotherGuineaPig() {
         return DB::table('guinea pigs')
@@ -28,27 +28,27 @@ class Litter extends Model {
 	}
     
     // Methods
-   /* public function getValidator() {
+    public function getValidator() {
         return Validator::make(
             array(
-                'name' =>              $this->name,
-                'birthdate' =>       $this->description,
-                'breedingabbr' =>    $this->breedingabbr,
-				'birthdate' => date('d.m.Y', strtotime($this->birthdate)),
-				'color' => $this->color,
-                'race' =>  $this->race,
-				'sexe' => $this->sexe,
-				'dateofdeath' => date('d.m.Y', strtotime($this->dateofdeath)),
-                'image' => $this->image
+                'startdate' =>              date('d.m.Y', strtotime($this->startdate)),
+                'expectedLitterDate' =>      date('d.m.Y', strtotime($this->expectedLitterDate)),
+                'earliestLitterdate' =>    date('d.m.Y', strtotime($this->earliestLitterdate)),
+				'realLitterdate' => date('d.m.Y', strtotime($this->realLitterdate)),
+				'Title' => $this->Title,
+                'IDMotherGP' =>  $this->IDMotherGP,
+				'IDFatherGP' => $this->IDFatherGP
             ),
             array(
-                'name' =>              'required|between:2,150',
-                'description' =>       'required|between:0,500',
-                'duration' =>    array('required', 'regex:/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/'),
-                'cast' =>              'between:0,500',
-                'image_description' => 'between:0,250'
+                'startdate' =>                array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
+                'expectedLitterDate' =>       array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
+                'earliestLitterdate' =>       array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
+                'realLitterdate' =>           array('regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
+                'Title' => 				     'between:2,40',
+				'IDMotherGP' =>              'required|numeric',
+				'IDFatherGP' =>              'required|numeric'
             )
         );
-    }*/
+    }
     
 }

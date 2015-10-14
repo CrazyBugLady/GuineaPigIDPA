@@ -156,7 +156,7 @@ Route::group(array('before' => 'auth'), function() {
 		]
 	);
     Route::get('/litter-overview/create/{id}', 'vwLitterController@create');
-    Route::post('/litter-overview/create/{id}', 'dbLitterController@create');
+    Route::post('/litter-overview/create/', 'dbLitterController@create');
 	
 	Route::get('/litter-overview/generate', 'vwLitterController@generatePossibleLitter');
 	Route::get('/litter-overview/generate', "vwLitterController@generatePossibleLitter");

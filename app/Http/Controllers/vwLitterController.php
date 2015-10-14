@@ -41,6 +41,10 @@ class vwLitterController extends ControllerShared {
 														'warning' => 'Es muss eine Zucht ausgewählt werden!'));
 	}
 	
+	public static function generatePossibleLitterParams(Request $request){
+		
+	}
+	
 	// TODO: Format => 50% Color
 	// TODO: Format => 50% Race
 
@@ -117,7 +121,7 @@ class vwLitterController extends ControllerShared {
 					}
 				}
 				
-				if(strlen($Combination) == 4 and ctype_upper(substr($Combination, 0, 1)) == true){
+				if(strlen($Combination) == 4 and ctype_upper(substr($Combination, 0, 1)) == true and $Combination != "Rnrn"){
 					$PartProperty[$CombinationKey] = substr($Combination, 0, 2) . substr($Combination, 0, 2);
 				}
 				

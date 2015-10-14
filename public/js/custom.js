@@ -1,11 +1,14 @@
 	$(document).ready(function() {
-	
+		var earliestperiod = 68;
+		var expectedlitterperiod = 80; // ca. 80 Tage, liegt zwischen dem Mittelwert und dem häufigsten Wert
+			
 		$('#warningLetalFactor').hide();
 		$("#tblLitterParams").hide();
 		$("#hLitter").hide();
 		$("#hLitterParams").hide();
 		$("#tblLitterRace").hide();
 		$("#tblLitterColor").hide();
+		$('#divCreate').hide();
 		
         $('#warningLetalFactor').css("display", "none");
 		
@@ -35,10 +38,12 @@
 		
 		$("#ddlWeibchen").change(function(){
 			getDataWeibchen();
+			$('#divCreate').hide();
 		});
 		
 		$("#ddlMaennchen").change(function(){
 			getDataMaennchen();
+			$('#divCreate').hide();
 		});
 		
 		function getGuineaPigInformation(idGuineaPig, racefield, colorfield, colorfieldoppositegender, agefield){
@@ -141,16 +146,6 @@
 			$("#tblLitterParams tbody > tr").remove();
 			var age = parseFloat(agefield.html());
 			var lettersize = "0";
-			var earliestdate = 68;
-			var gestationperiod = 80; // ca. 80 Tage, liegt zwischen dem Mittelwert und dem häufigsten Wert
-			
-			var Today = new Date();
-			var earliestLitterDate = new Date();
-			var possibleLitterDate = new Date();
-			var msperDay = 86400000;
-
-			earliestLitterDate.setTime(Today.getTime() + earliestdate * msperDay);
-			possibleLitterDate.setTime(Today.getTime() + gestationperiod * msperDay);
 			
 			if(age < 1)
 			{
@@ -169,8 +164,8 @@
 			
 			$("#tblLitterParams tbody").append("<tr>" +
 												"<td>"+ lettersize + "</td>" +
-												"<td>"+ earliestLitterDate.getDate() + "." + (earliestLitterDate.getMonth() + 1) + "." + earliestLitterDate.getFullYear() + "</td>" +
-												"<td>"+ possibleLitterDate.getDate() + "." + (possibleLitterDate.getMonth() + 1) + "." + possibleLitterDate.getFullYear() + "</td>" +
+												"<td>"+ earliestdate + "</td>" +
+												"<td>"+ expectedlitterdate+ "</td>" +
 												"<td>1:1</td>" +
 												"</tr>");
 												
@@ -178,10 +173,48 @@
 			$("#hLitterParams").show("slow");
 		}
 		
+		function setUpDates(startdate){
+			var startdatefragments = startdate.split(".")
+			var startdate = new Date(startdatefragments[2], (startdatefragments[1] - 1), startdatefragments[0]);
+			var earliestLitterDate = new Date();
+			var possibleLitterDate = new Date();
+			var msperDay = 86400000;
+
+			earliestLitterDate.setTime(startdate.getTime() + earliestperiod * msperDay);
+			possibleLitterDate.setTime(startdate.getTime() + expectedlitterperiod * msperDay);
+			
+			$("#tbExpectedLitterdate").val(possibleLitterDate.getDate() + "." + (possibleLitterDate.getMonth() + 1) + "." + possibleLitterDate.getFullYear());
+			$("#tbEarliestLitterdate").val(earliestLitterDate.getDate() + "." + (earliestLitterDate.getMonth() + 1) + "." + earliestLitterDate.getFullYear());
+		}		
+		
+		$("#tbStartdate").on('change', function() {
+			setUpDates($("#tbStartdate").val());
+		});
+		
+		function setUpFormForCreating(){
+			$('#divCreate').show('slow');
+			var startdateDefault = new Date();
+			var strStartdateDefault = startdateDefault.getDate() + "." + (startdateDefault.getMonth() + 1) + "." + startdateDefault.getFullYear()
+			$("#tbStartdate").val(strStartdateDefault);
+			setUpDates(strStartdateDefault);
+			//setUpDates($("#tbStartdate").val());
+		}
+		
+		function cancelCreating(){
+			$('#divCreate').hide();
+		}
+		
 		$("#btnCreateWurfTemp").on('click', function(e){
 			e.preventDefault();
 			generatePossibleLitterColor($("#ddlWeibchen").val(), $("#ddlMaennchen").val());
 			generatePossibleLitterRace($("#ddlWeibchen").val(), $("#ddlMaennchen").val());
 			generatePossibleLitterParams($("#spAgeW"));
+			cancelCreating();
+			
+		});
+		
+		$("#btnCreateWurf").on('click', function(e){
+			e.preventDefault();
+			setUpFormForCreating();
 		});
 	});

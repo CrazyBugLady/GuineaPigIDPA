@@ -13,13 +13,12 @@ class dbGuineaPigController extends ControllerShared {
 	public static function create(){
 		$guineapig = self::buildGuineaPig(new GuineaPig());
 		$selected_breeding = Breeding::find(Route::input('id'));
-		
 		if($guineapig->getValidator()->fails()){
-			return Redirect::to('/guineapigs-overview')->withErrors($guineapig->getValidator())->with(array("id" => $selected_breeding->ID));
+			return Redirect::to('/guineapigs-overview/' . $selected_breeding->ID)->withErrors($guineapig->getValidator());
 		}
 		
 		if($guineapig->save()){
-			return Redirect::to('/guineapigs-overview')->with(array('title' => 'Meerschweinchen erfolgreich erstellt', 
+			return Redirect::to('/guineapigs-overview/' . $selected_breeding->ID)->with(array('title' => 'Meerschweinchen erfolgreich erstellt', 
 																	'success' => 'Meerschweinchen konnte erstellt werden!'));
 		}
 
@@ -94,8 +93,8 @@ class dbGuineaPigController extends ControllerShared {
 		$guineapig->id_breeding = Input::get('ddlIdBreeding');
         $guineapig->birthdate = Input::get('tbAlter');
         $guineapig->breedingabbr = Input::get('tbKuerzel');
-        $guineapig->race = Input::get('tbRasseformel');
-		$guineapig->color = Input::get('tbFarbformel');
+        $guineapig->Race = Input::get('tbRasseformel');
+		$guineapig->Color = Input::get('tbFarbformel');
         $guineapig->sexe = Input::get('rgeschlecht');
         /*if (Input::hasFile('image')) {
             $event->image_path = self::generateImageFileName();
