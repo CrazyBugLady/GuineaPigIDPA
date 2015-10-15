@@ -12,6 +12,14 @@ class Breeding extends Model {
         return $this->belongsTo('App\User');
     }
 	
+	public function mostCurrentLitters(){
+		$litters = DB::table('litter')			
+					->join('guinea pigs', 'guinea pigs.ID', '=', 'litter.IDMotherGP')
+                    ->where('id_breeding', $this->ID)
+					->select('litter.*');
+		return $litters->get();
+	}
+	
 	public function guineapigs($sexe = -1) {
 	
 		if($sexe > -1)

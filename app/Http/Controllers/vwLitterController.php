@@ -8,11 +8,15 @@ use View, Input, Redirect, Route, Validator;
 use App\User;
 use App\GuineaPig;
 use App\Breeding;
+use App\Litter;
 use DB;
 
 class vwLitterController extends ControllerShared {
 	public static function index() {
-		return View::make('litters.litter');
+		$breedings = self::getLoggedInUser()->breedings;
+		$litter = Litter::find(1);
+		dd($litter->MotherName);
+		return View::make('litters')->with(array("breedings" => $breedings));
 	}
 	
 	public static function create(){	

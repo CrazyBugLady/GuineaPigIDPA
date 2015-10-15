@@ -7,21 +7,24 @@ class Litter extends Model {
     // Relations
 	protected $table = 'litter';
 	
-	 protected $fillable = ['startdate, expectedLitterDate', 'earliestLitterdate', 'realLitterdate', 'Title', 'IDMotherGP', 'IDFatherGP'];
+	protected $fillable = ['startdate, expectedLitterDate', 'earliestLitterdate', 'realLitterdate', 'Title', 'IDMotherGP', 'IDFatherGP'];
 	
     public function MotherGuineaPig() {
-        return DB::table('guinea pigs')
-                ->where('sexe', '=', 1)
-                ->where('idLitter', $this->ID)
-                ->first();
+		return $this->belongsTo('App\GuineaPig', 'ID', 'IDMotherGP');
     }
 	
+	public function MotherName(){
+		dd($this->MotherGuineaPig());
+		return $this->MotherGuineaPig()->Name;
+	}
+	
 	public function FatherGuineaPig() {
-        return DB::table('guinea pigs')
-                ->where('sexe', '=', 0)
-                ->where('idLitter', $this->ID)
-                ->first();
+        return $this->belongsTo('App\GuineaPig', 'ID', 'IDFatherGP');
     }
+	
+	public function FatherName(){
+		return $this->FatherGuineaPig()->Name;
+	}
 	
 	public function guineapigs(){
 		return $this->hasMany("App\GuineaPig", "ID", "idLitter");
