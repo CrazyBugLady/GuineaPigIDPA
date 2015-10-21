@@ -22,7 +22,7 @@
                   </ul>
                 </li>
 				@if ($user != null)
-				<li><a href="#">Aktuell</a></li>
+				<li><a href="{{ route('litter-overview') }}">Aktuell</a></li>
 				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zucht administrieren<span class="caret"></span></a>
                   <ul class="dropdown-menu">

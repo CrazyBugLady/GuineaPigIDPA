@@ -147,8 +147,15 @@ Route::group(array('before' => 'auth'), function() {
 
 Route::group(array('before' => 'auth'), function() {
 
-	Route::get('/litter-overview/', 'vwLitterController@index');
-
+	Route::get(
+	
+	'/litter-overview', 
+		[
+			"uses" => 'vwLitterController@index',
+			"as" => 'litter-overview'
+		]
+	);
+	
 	Route::get(
 	
 	'/litter-overview/create/', 

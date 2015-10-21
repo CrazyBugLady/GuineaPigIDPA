@@ -14,8 +14,6 @@ use DB;
 class vwLitterController extends ControllerShared {
 	public static function index() {
 		$breedings = self::getLoggedInUser()->breedings;
-		$litter = Litter::find(1);
-		dd($litter->MotherName);
 		return View::make('litters')->with(array("breedings" => $breedings));
 	}
 	

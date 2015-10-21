@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Validator;
+use App\GuineaPig;
 
 class Litter extends Model {
     // Relations
@@ -10,16 +11,15 @@ class Litter extends Model {
 	protected $fillable = ['startdate, expectedLitterDate', 'earliestLitterdate', 'realLitterdate', 'Title', 'IDMotherGP', 'IDFatherGP'];
 	
     public function MotherGuineaPig() {
-		return $this->belongsTo('App\GuineaPig', 'ID', 'IDMotherGP');
+		return $this->belongsTo('App\GuineaPig', 'IDMotherGP', 'ID');
     }
 	
 	public function MotherName(){
-		dd($this->MotherGuineaPig());
-		return $this->MotherGuineaPig()->Name;
+		return $this->MotherGuineaPig()->first()->Name;
 	}
 	
 	public function FatherGuineaPig() {
-        return $this->belongsTo('App\GuineaPig', 'ID', 'IDFatherGP');
+        return $this->belongsTo('App\GuineaPig', 'IDFatherGP', 'ID');
     }
 	
 	public function FatherName(){

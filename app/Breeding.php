@@ -16,7 +16,7 @@ class Breeding extends Model {
 		$litters = DB::table('litter')			
 					->join('guinea pigs', 'guinea pigs.ID', '=', 'litter.IDMotherGP')
                     ->where('id_breeding', $this->ID)
-					->select('litter.*');
+					->select('litter.*', 'guinea pigs.Name');
 		return $litters->get();
 	}
 	
