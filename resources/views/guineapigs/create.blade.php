@@ -247,99 +247,91 @@
 		
 		<div class="row">
 			<div class="form-group">
-				<input type="radio" name="Farbschlag" value="argente"> Argente <br> 
-				<input type="radio" name="Farbschlag" value="agouti"> Agouti <br> 
-				<input type="radio" name="Farbschlag" value="tanfox"> Tan/Fox <br> 
-				<input type="radio" name="Farbschlag" value="zeichnung"> Zeichnungen <br> 
-				<input type="radio" name="Farbschlag" value="einfarbig"> Einfarbig <br> 
-				<input type="radio" name="Farbschlag" value="solid"> Solid <br> 
-				<input type="radio" name="Farbschlag" value="dapple"> Dapple <br> 
+				<label for="cbagouti" class="col-sm-3 control-label">Agouti/Argente <span class="glyphicon glyphicon-question-sign"></span></label>
+					<div class="col-sm-3">
+						<input type="radio" class="form-control" name="Farbgruppe" id="cbagouti" value="agouti" checked>
+					</div>
+					<div class="col-sm-6">
+						<select class="form-control" id="ddlAgouti">
+							<option>Am. Crested</option>
+							<option>Glatthaar</option>
+							<option>Rosetten</option>
+							<option>Rex</option>
+							<option>US-Teddy</option>
+							<option>CH-Teddy</option>
+							<option>Curly</option>
+							<option>Angora</option>
+							<option>Sheba Mini Yak</option>
+							<option>Minipli</option>
+						</select>
+					</div>
 			</div>
 		</div>
 		
-		
-		
 		<div class="row">
 			<div class="form-group">
-				<label for="cbAgouti" class="col-sm-3 control-label">Agouti <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Agouti" data-content=""></span></label>
+				<label for="cbSolid" class="col-sm-3 control-label">Solid <span class="glyphicon glyphicon-question-sign"></span></label>
 				<div class="col-sm-3">
-					<input type="checkbox" class="form-control" id="cbAgouti" value="agouti" checked>
+					<input type="radio" class="form-control" name="Farbgruppe" id="cbSolid" value="solid" checked>
 				</div>
 				<div class="col-sm-6">
-					<select class="form-control" id="ddlAgouti">
-						<option value="0">agouti/argente</option>
-						<option value="1">solid agouti</option>
-						<option value="2">lohfarben</option>
+					<select class="form-control" id="ddlSolid">
+						<option>Texel</option>
+						<option>Sheltie</option>
+						<option>Coronet</option>
+						<option>Peruaner</option>
+						<option>Merino</option>
+						<option>Alpaka</option>
+						<option>Lunkarya</option>
+						<option>Merino</option>
 					</select>
 				</div>
 			</div>
-		</div>		
-				
+		</div>
+		
 		<div class="row">
 			<div class="form-group">
-				<label for="ddlRotreihe" class="col-sm-3 control-label">Rotreihe <span class="glyphicon glyphicon-question-sign"></span></label>
-					<div class="col-sm-9" id="ddlRotreihe">
-						<select class="form-control">
-							<option value="0">gold r.e</option>
-							<option value="1">gold d.e</option>
-							<option value="2">rot</option>
-							<option value="3">buff</option>
-							<option value="4">safran</option>
-							<option value="5">creme r.e</option>
-							<option value="6">creme d.e</option>
-							<option value="7">weiss r.e</option>
-							<option value="8">weiss d.e</option>
-						</select>
-					</div>
+				<label for="cbzeichnungen" class="col-sm-3 control-label">Zeichnungen <span class="glyphicon glyphicon-question-sign"></span></label>
+				<div class="col-sm-3">
+					<input type="radio" class="form-control" name="Farbgruppe" id="cbzeichnungen" value="zeichnungen" checked>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" id="ddlZeichnung">
+						<option>Texel</option>
+						<option>Sheltie</option>
+						<option>Coronet</option>
+						<option>Peruaner</option>
+						<option>Merino</option>
+						<option>Alpaka</option>
+						<option>Lunkarya</option>
+						<option>Merino</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="form-group">
-				<label for="ddlSchwarzreihe" class="col-sm-3 control-label">Schwarzreihe <span class="glyphicon glyphicon-question-sign"></span></label>
-					<div class="col-sm-9" id="ddlSchwarzreihe">
-						<select class="form-control">
-							<option value='0'>Beige</option>
-							<option value='1'>Lilac</option>
-							<option value='2'>Coffee</option>
-							<option value='3'>Slate Blue</option>
-							<option value='4'>Schokolade</option>
-							<option value='5'>Schwarz</option>
-						</select>
-					</div>
+				<label for="cbEinfarbig" class="col-sm-3 control-label">Einfarbig <span class="glyphicon glyphicon-question-sign"></span></label>
+				<div class="col-sm-3">
+					<input type="radio" class="form-control" name="Farbgruppe" id="cbEinfarbig" value="einfarbig" checked>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" id="ddlEinfarbig">
+						<option>Texel</option>
+						<option>Sheltie</option>
+						<option>Coronet</option>
+						<option>Peruaner</option>
+						<option>Merino</option>
+						<option>Alpaka</option>
+						<option>Lunkarya</option>
+						<option>Merino</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="form-group">
-				<label for="ddlScheckung" class="col-sm-3 control-label">Deckungsfaktor <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Deckungsfaktor" data-content="Ist das Meerschweinchen gescheckt? Zeigt sich nur eine der beiden Farbreihen?"></span></label>
-					<div class="col-sm-9">
-						<select class="form-control" id="ddlE">
-							<option value='0'>gescheckt</option>
-							<option value='1'>keine Rotreihe</option>
-							<option value='2'>keine Schwarzreihe</option>
-						</select>
-					</div>
-			</div>
-		</div>
 		
-		<div class="row">
-			<div class="form-group">
-				<label for="ddlScheckung" class="col-sm-3 control-label">Schimmel / Dalmatiner <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Deckungsfaktor" data-content="Ist das Meerschweinchen gescheckt? Zeigt sich nur eine der beiden Farbreihen?"></span></label>
-					<div class="col-sm-9">
-						<input type="checkbox" class="form-control" id="cbDalmatinerSchimmel" value="Rnrn" checked>
-					</div>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="form-group">
-				<label for="cbWeissscheckung" class="col-sm-3 control-label">Weissscheckung <span class="glyphicon glyphicon-question-sign" data-trigger="hover" data-placement="top" data-toggle="popover" title="Deckungsfaktor" data-content="Ist das Meerschweinchen gescheckt? Zeigt sich nur eine der beiden Farbreihen?"></span></label>
-					<div class="col-sm-9">
-						<input type="checkbox" class="form-control" id="cbWeissscheckung" value="ss" checked>
-					</div>
-			</div>
-		</div>
 		
 		
 		

@@ -168,10 +168,35 @@
 			
 			$("#tblLitterParams tbody").append("<tr>" +
 												"<td>"+ lettersize + "</td>" +
-												"<td>"+ earliestperiod + "</td>" +
+												"<td>68</td>" +
 												"<td>"+ expectedlitterperiod + "</td>" +
 												"<td>1:1</td>" +
 												"</tr>");
+			$("#tblLitterParams tbody").append("<tr>" +
+												"<td>-</td>" +
+												"<td>-</td>" +
+												"<td> 74 ( 11,63 %)</td>" +
+												"<td>1:1</td>" +
+												"</tr>");
+			$("#tblLitterParams tbody").append("<tr>" +
+												"<td>-</td>" +
+												"<td>-</td>" +
+												"<td> 81 (11,63%)</td>" +
+												"<td>1:1</td>" +
+												"</tr>");
+			$("#tblLitterParams tbody").append("<tr>" +
+												"<td>-</td>" +
+												"<td>-</td>" +
+												"<td>zwischen 73 und 83 (ca. 65%)</td>" +
+												"<td>1:1</td>" +
+												"</tr>");
+			$("#tblLitterParams tbody").append("<tr>" +
+												"<td>-</td>" +
+												"<td>-</td>" +
+												"<td>unter 73 oder über 83 (ca. 35%)</td>" +
+												"<td>1:1</td>" +
+												"</tr>");
+			
 												
 			$("#tblLitterParams").show("slow");
 			$("#hLitterParams").show("slow");
