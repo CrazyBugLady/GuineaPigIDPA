@@ -12,17 +12,26 @@ use DB;
 
 abstract class SharedGuineaPigController extends Controller
 {
+		protected static function findCodeForName($name){
+			$combination = DB::table('combinations')					
+							->where('Name', $name)
+							->first();
+			
+			return $combination->Code;
+							
+		}
+	
 		protected static function findDescription($type, $code){
 
 			$combinations = DB::table('combinations')					
 							->where('CombinationType', $type)
-							->where('Description', $code);
+							->where('Code', $code);
 	
 			if($combinations->first() == null)
 			{
 				return self::findDescriptionForHeterozygoteCode($type, $code);
 			}
-		
+			
 			return $combinations->first()->Name;
 		}
 		
@@ -32,12 +41,12 @@ abstract class SharedGuineaPigController extends Controller
 							->get();			
 							
 			foreach($combinations as $combination){			
-				if(strpos($combination->Description, "?") !== false) { // the code can be compared thus he has the possibility of being similar
-					$CodeCompare = explode(" ", trim($combination->Description));
+				if(strpos($combination->Code, "?") !== false) { // the code can be compared thus he has the possibility of being similar
+					$CodeCompare = explode(" ", trim($combination->Code));
 					$CodeToGet = explode(" ", trim($code));
 					
 					foreach($CodeCompare as $CCKey => $CCPart){
-						$PartsCodeToCompare = self::getParts($combination->Description);
+						$PartsCodeToCompare = self::getParts($combination->Code);
 						$PartsCodeToGet = self::getParts($code);
 
 						foreach($PartsCodeToCompare as $PartIndex => $Part){

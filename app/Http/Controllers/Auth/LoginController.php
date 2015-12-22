@@ -30,10 +30,16 @@ class LoginController extends Controller
 			Session::put('user', serialize($user));
 			Session::save();
 			
-			return Redirect::intended('/')->with(array('title' => 'Login erfolgreich', 'success' => 'Du konntest erfolgreich eingeloggt werden.'));
+			return Redirect::intended('/welcome')->with(array('title' => 'Login erfolgreich', 'success' => 'Du konntest erfolgreich eingeloggt werden.'));
 		}
 		
 		return Redirect::intended('/auth/login')->with(array('title' => 'Falsche Daten', 'warning' => "Die Mailadresse oder das Passwort sind nicht korrekt."));
+	}
+	
+	public function logout(){
+		Session::forget('user');
+
+		return Redirect::intended('/welcome')->with(array('title' => 'Logout erfolgreich', 'success' => 'Du konntest erfolgreich ausgeloggt werden.'));
 	}
 
 }

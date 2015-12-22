@@ -38,6 +38,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Breeding', 'user_id', 'ID');
     }
 	
+	public function getValidator() {
+        return Validator::make(
+            array(
+                'email' =>            $this->Email,
+                'birthdate' =>    $this->birthdate,
+				'firstname' => $this->firstname,
+				'lastname' => $this->lastname
+            ),
+            array(
+                'email' => 'required',
+                'birthdate' => 'required|date_format:d.m.Y',
+                'firstname' => 'required',
+				'lastname' => 'required'
+            )
+        );
+    }
 	
 	 /**
      * Get the unique identifier for the user.

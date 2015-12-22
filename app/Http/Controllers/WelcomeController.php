@@ -12,4 +12,12 @@ class WelcomeController extends Controller
 	public function index(){
 		return View::make("welcome");
 	}
+	
+	public function application(){
+		return View::make("project.application");		
+	}
+	
+	public function team(){
+		return View::make("project.team");		
+	}
 }

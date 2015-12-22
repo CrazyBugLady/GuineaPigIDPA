@@ -21,13 +21,13 @@
 		<input type="password" class="form-control" name="tbPassword" id="tbPassword" placeholder="Password">
 	</div>
 
-    <div class="form-group">
-		<input type="checkbox" class="form-control" name="cbRemember" id="cbRemember"> Remember me
-	</div>
-
-    <div>
-        <button type="submit" class="btn btn-success">Einloggen</button>
-    </div>
+	<hr>
+		<div class="row">
+			<div class="col-md-6" style="float:right">
+				<button type="submit" class="btn btn-success btn-lg btn-block">Einloggen</button>		
+			</div>
+		</div>
+	<hr>
 </form>
 
 @stop

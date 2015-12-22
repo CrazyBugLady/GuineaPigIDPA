@@ -29,9 +29,9 @@ class dbBreedingController extends Controller {
 	}
 
 	public static function buildBreeding($breeding){
-		$breeding->name = Input::get('tbName');
-        $breeding->breedingabbrdef = Input::get('tbKuerzel');
-        $breeding->description = Input::get('txtDescription');		
+		$breeding->Name = Input::get('tbName');
+        $breeding->BreedingAbbrDef = Input::get('tbKuerzel');
+        $breeding->Description = Input::get('txtDescription');		
 		$breeding->user_id = self::getLoggedInUser()->ID;
 		
 		return $breeding;

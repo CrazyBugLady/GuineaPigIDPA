@@ -16,47 +16,53 @@ class Breeding extends Model {
 		$litters = DB::table('litter')			
 					->join('guinea pigs', 'guinea pigs.ID', '=', 'litter.IDMotherGP')
                     ->where('id_breeding', $this->ID)
+					->where('LitterStatus', 'unbekannt')
 					->select('litter.*', 'guinea pigs.Name');
 		return $litters->get();
 	}
 	
 	public function guineapigs($sexe = -1) {
 	
-		if($sexe > -1)
+		if($sexe > -1 and $sexe < 3)
 		{
 			$breedingGP = DB::table('guinea pigs')					
                     ->where('id_breeding', $this->ID)
-					->where('sexe', '=', $sexe)
-                    ->get();
+					 ->whereNull('DateOfDeath')
+					->where('sexe', '=', $sexe);
+		}
+		else if($sexe == -1)
+		{
+			$breedingGP = DB::table('guinea pigs')					
+                    ->where('id_breeding', $this->ID);
 		}
 		else
 		{
-			$breedingGP = DB::table('guinea pigs')					
-                    ->where('id_breeding', $this->ID)
-                    ->get();
+			$breedingGP = DB::table('guinea pigs')		
+					 ->whereNotNull('DateOfDeath')
+                    ->where('id_breeding', $this->ID);			
 		}
 		
-		return $breedingGP;
+		return $breedingGP->get();
 					
     }
 
     
 	protected $table = 'breedings';
 	
-	protected $fillable = ['name', 'description', 'breedingabbrdef', 'user_id'];
+	protected $fillable = ['Name', 'Description', 'BreedingAbbrDef', 'user_id'];
 	
     // Methods
     public function getValidator() {
         return Validator::make(
             array(
-                'name' =>              $this->name,
-                'description' =>       $this->description,
-                'breedingabbrdef' =>    $this->breedingabbrdef,
+                'Name' =>              $this->Name,
+                'Description' =>       $this->Description,
+                'BreedingAbbrDef' =>    $this->BreedingAbbrDef,
             ),
             array(
-                'name' =>              'required|between:2,45',
-                'description' =>       'required',
-                'breedingabbrdef' =>   'required|between:2,10'
+                'Name' =>              'required|between:2,45',
+                'Description' =>       'required',
+                'BreedingAbbrDef' =>   'required|between:2,10'
             )
         );
     }

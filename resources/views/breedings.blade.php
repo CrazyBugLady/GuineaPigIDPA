@@ -3,19 +3,24 @@
 @section('title', 'Zuchten Übersicht')
 
 @section('default-content')
-<h1>Zuchten</h1>  
+
+<h1>Zuchtenübersicht</h1>  
 	  
-	<div class="row">
-			<div class="form-group">
-				<div class="col-sm-12">
-					<a href="{{ route('create-breeding') }}" id="createBreeding" class="btn btn-primary btn-lg btn-block">Neue Zucht erstellen</a>
-				</div>
+	<div class="row ">
+		
+		<div class="form-group">
+			<div class="col-sm-12">
+			<h2>Optionen</h2>
+			
+				<a href="{{ route('create-breeding') }}" id="createBreeding" class="btn btn-primary btn-lg btn-block">Neue Zucht erstellen</a>
 			</div>
+		</div>
 	</div>  
 	  
 	<div id="row">
 		<div id="col-md-12">	
-			<table class="table table-striped">
+			<h2>Zuchten</h2>
+			<table class="table table-responsive">
 				<tr>
 					<th>Zuchtname</th>
 					<th>Zuchtkürzel (Standard)</th>
@@ -31,9 +36,9 @@
 					 @foreach ($breedings as $breeding)
 					 <tr>
 						<td>{{{ $breeding->Name}}}</td>
-						<td>{{{ $breeding->breedingAbbrDef}}}</td>
+						<td>{{{ $breeding->BreedingAbbrDef}}}</td>
 						<td>{{{ count($breeding->guineapigs(-1)) }}}</td>
-						<td>{{{ $breeding->description }}}</td>
+						<td>{{{ $breeding->Description }}}</td>
 						<td><a href="{{ route('guineapigs-overview') }}/{{{ $breeding->ID }}}">Zuchtüberblick</a></td>
 					</tr>
 					@endforeach

@@ -17,8 +17,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Über das Projekt<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="team">Das Team</a></li>
-                    <li><a href="application">Die Applikation</a></li>
+                    <li><a href="{{ route('team') }}">Das Team</a></li>
+                    <li><a href="{{ route('application') }}">Die Applikation</a></li>
                   </ul>
                 </li>
 				@if ($user != null)
@@ -35,20 +35,14 @@
                   </ul>
                 </li>
 				@endif
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Genetik How To <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="colorgenetics">Farbgenetik</a></li>
-                    <li><a href="racegenetics">Rassegenetik</a></li>
-                  </ul>
-                </li>
+				
               </ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if ($user == null)
 					<li><a href="{{ route('register') }}" class="btn btn-primary">Register</a></li>
 					<li><a href="{{ route('auth/login') }}" class="btn btn-success">Sign in</a></li>
 					@else
-					<li><a href="sign" class="btn btn-danger">Sign out</a></li>
+					<li><a href="{{ route('auth/logout') }}" class="btn btn-danger">Sign out</a></li>
 					@endif
 				</ul>
             </div>
