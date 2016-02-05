@@ -8,7 +8,7 @@ class Litter extends Model {
     // Relations
 	protected $table = 'litter';
 	
-	protected $fillable = ['startdate, expectedLitterDate', 'earliestLitterdate', 'realLitterdate', 'Title', 'IDMotherGP', 'IDFatherGP'];
+	protected $fillable = ['startdate, expectedLitterDate', 'earliestLitterdate', 'realLitterdate', 'Title', 'IDMotherGP', 'IDFatherGP', 'Litterresult', 'LitterStatus'];
 	
     public function MotherGuineaPig() {
 		return $this->belongsTo('App\GuineaPig', 'IDMotherGP', 'ID');
@@ -40,16 +40,18 @@ class Litter extends Model {
 				'realLitterdate' => date('d.m.Y', strtotime($this->realLitterdate)),
 				'Title' => $this->Title,
                 'IDMotherGP' =>  $this->IDMotherGP,
-				'IDFatherGP' => $this->IDFatherGP
+				'IDFatherGP' => $this->IDFatherGP,
+				'Litterresult' => $this->LitterResult
             ),
             array(
                 'startdate' =>                array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
                 'expectedLitterDate' =>       array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
                 'earliestLitterdate' =>       array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
                 'realLitterdate' =>           array('regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
-                'Title' => 				     'between:2,40',
+                'Title' => 				     'required|between:2,40',
 				'IDMotherGP' =>              'required|numeric',
-				'IDFatherGP' =>              'required|numeric'
+				'IDFatherGP' =>              'required|numeric',
+				'Litterresult' => 			 'between:5,11'
             )
         );
     }

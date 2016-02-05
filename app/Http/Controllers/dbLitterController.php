@@ -8,8 +8,45 @@ use App\GuineaPig;
 use App\Breeding;
 use App\Weight;
 use App\Litter;
+use DateTime;
+use DB;
 
 class dbLitterController extends ControllerShared {
+
+	public static function icc(){
+		$mother = GuineaPig::find(Input::get("idW"));
+		$father = GuineaPig::find(Input::get("idM"));
+		
+		$familytreeMother = $mother->familyTree();
+		$familytreeFather = $father->familyTree();
+		
+		$icclist = array();		
+		
+		// wir wollen den Inzuchtkoeffizient nur für die beiden Elterntiere berechnen... Da alles andere momentan zu zeitaufwändig wäre
+		
+		$icclist["Vatertier"] = "0%";
+		
+		// Kommt Vatertier auch in Mutterstammbaum vor ? Ist es der Vater der Mutter oder der Grossvater väterlicherseits, respektive mütterlicherseits?
+		if($familytreeMother["father_id"] == $father->ID){
+			$icclist["Vatertier"] = pow(0.5, 1 + 2 - 1)* 100 . "%";
+		}
+		else if($familytreeMother["grandfather_f_id"] == $father->ID or $familytreeMother["grandfather_m_id"] == $father->ID){
+			$icclist["Vatertier"] = pow(0.5, 1 + 3 - 1)* 100 . "%";		
+		}
+		
+		// Kommt Muttertier auch im Vaterstammbaum vor? Ist es die Mutter des Vater, die Grossmutter väterlicherseits respektive mütterlicherseits?
+		
+		$icclist["Muttertier"] = "0%";
+		
+		if($familytreeFather["mother_id"] == $mother->ID){
+			$icclist["Muttertier"] = pow(0.5, 1 + 2 - 1) * 100 . "%";
+		}
+		else if($familytreeFather["grandmother_f_id"] == $mother->ID or $familytreeFather["grandmother_m_id"] == $mother->ID){
+			$icclist["Muttertier"] = pow(0.5, 1 + 3 - 1)* 100 . "%";		
+		}
+		
+		return json_encode($icclist);
+	}
 
 	public static function create(){
 		$litter = self::buildLitter(new Litter());
@@ -46,7 +83,20 @@ class dbLitterController extends ControllerShared {
 	}
 	
 	public static function update(){
-	
+		$newStatus = Input::get('newStatus');
+		$idlitter = Input::get('id');
+		$dt = new DateTime();
+
+		$update = DB::table('litter')->where('ID', $idlitter)->update(['LitterStatus' => $newStatus, 'realLitterdate' => $dt->format('d.m.Y')]);		
+			
+		if($update){
+			return Redirect::to('/litter-overview/')->with(array('title' => 'Wurf wurde erfolgreich gesetzt!', 
+																	'success' => 'Wurf wurde erfolgreich gesetzt!'));			
+		}
+		else{
+			return Redirect::to('/litter-overview/')->withErrors("Ein technischer Fehler ist aufgetreten!");		
+		}
+		
 	}
 	
 	public static function delete(){

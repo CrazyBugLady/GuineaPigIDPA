@@ -5,6 +5,9 @@
 @section('default-content')
 		
 		
+		<a href="{{ route('guineapigs-overview') }}/{{{ $breeding->ID }}}" class="btn btn-success">Zur Zucht zurückkehren</a>
+		
+		
 		<h1>Neuen Wurf generieren</h1>
 		
 		<h2>Zusammenstellung</h2>
@@ -62,7 +65,7 @@
 				<div class="row">
 					<div class="form-group">
 						<div class="col-sm-6">
-							<button id="btnCreateWurfTemp" class="btn btn-warning btn-lg btn-block">Wurf Vorschau</button>
+							<button id="btnCreateWurfTemp" class="btn btn-warning btn-lg btn-block">Wurfvorschau</button>
 						</div>
 						<div class="col-sm-6">
 							<button id="btnCreateWurf" class="btn btn-success btn-lg btn-block">Verpaarung erstellen</button>
@@ -81,7 +84,7 @@
 								<div class="form-group">
 									<label for="tbTitle" class="col-sm-3 control-label">Titel</span></label>
 										<div class="col-sm-9">
-											<input type="text" class="form-control" name="tbTitle" id="tbTitle" placeholder="Titel des Wurfs"/>
+											<input type="text" class="form-control" name="tbTitle" id="tbTitle" placeholder="Titel des Wurfs" required="required"/>
 										</div>
 								</div>
 								<div class="form-group">
@@ -114,7 +117,7 @@
 				
 				
 				
-				<div class="row">
+				<div class="row" id="divMessages">
 					<div class="col-md-12">	
 					<hr>
 					<h3>Meldungen</h3>
@@ -128,6 +131,22 @@
 		
 		
 		<hr>
+		
+		<h2 id="hIncest">Inzuchtkoeffizienten</h2>
+		
+		<div class="row">
+			<div class="col-md-12">	
+				<table class="table table-striped" id="tblIncest">
+					<thead>
+						<th>Verwandter</th>
+						<th width="40%">Inzuchtkoeffizient</th>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
 		
 		<h2 id="hLitter">Erwarteter Wurf</h2>
 		
@@ -166,9 +185,11 @@
 				<table class="table table-striped" id="tblLitterParams">
 					<thead>
 						<th>Anzahl Junge</th>
-						<th>kürzeste Tragzeit</th>
+						<th>wahrscheinlichster Bereich der Tragzeit</th>
 						<th>wahrscheinlichste Tragzeit</th>
-						<th>Geschlechterverteilung</th>
+						<th>Männchen</th>
+						<th>Weibchen</th>
+						<th>Todgeburten</th>
 					</thead>
 					<tbody>
 						

@@ -21,12 +21,9 @@ abstract class Controller extends BaseController
 			$breedings = $user->breedings()->get();
 		}
 		
-			
 		View::share("user", $user);
-		View::share("breedings", $breedings);
-		
+		View::share("breedings", $breedings);	
 	}
-	
 	
 	public static function getLoggedInUser(){
 		$user = Auth::user();

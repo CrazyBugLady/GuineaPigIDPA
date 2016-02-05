@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Validator;
 use App\Weight;
 use DateTime;
+use DB;
 
 class GuineaPig extends Model {
 
@@ -20,24 +21,67 @@ class GuineaPig extends Model {
      *
      * @var array
      */
-    protected $fillable = ['image', 'name', 'birthdate', 'dateofdeath', 'sexe', 'race', 'color', 'breedingabbr', 'id_breeding'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = ['image', 'name', 'birthdate', 'dateofdeath', 'CastrationDate', 'sexe', 'race', 'color', 'breedingabbr', 'idLitter', 'id_breeding'];
 
 
     // Relations
     public function breeding() {
-        return $this->belongsTo('App\Breeding', 'ID', 'id_breeding');
+        return $this->belongsTo('App\Breeding', 'id_breeding', 'ID');
     }
 	
 	public function parentLitter() {
-        return $this->belongsTo('App\Litter', 'ID', 'IdLitter');
+        return $this->belongsTo('App\Litter', 'idLitter', 'ID')->first();
     }
+	
+	public function familyTree(){
+		$familyTree = array();
+		$familyTree["mother"] = "unbekannt";
+		$familyTree["mother_id"] = 0;
+		$familyTree["father"] = "unbekannt";
+		$familyTree["father_id"] = 0;
+		$familyTree["grandmother_m"] = "unbekannt";
+		$familyTree["grandmother_m_id"] = 0;
+		$familyTree["grandfather_m"] ="unbekannt";
+		$familyTree["grandfather_m_id"] = 0;
+		$familyTree["grandmother_f"] = "unbekannt";
+		$familyTree["grandmother_f_id"] = 0;
+		$familyTree["grandfather_f"] = "unbekannt";
+		$familyTree["grandfather_f_id"] = 0;	
+			
+		$litter = $this->parentLitter();	
+		
+		if($litter != null){
+			$mother = GuineaPig::find($litter->IDMotherGP);
+			$father = GuineaPig::find($litter->IDFatherGP);
+
+			$familyTree["mother"] = $mother->Name;
+			$familyTree["mother_id"] = $mother->ID;
+			$familyTree["father"] = $father->Name;
+			$familyTree["father_id"] = $father->ID;
+			
+			$motherlitter = $mother->parentLitter();
+			if($motherlitter != null){
+				$grandmother_m = GuineaPig::find($motherlitter->IDMotherGP);
+				$grandfather_m = GuineaPig::find($motherlitter->IDFatherGP);
+				$familyTree["grandmother_m"] = $grandmother_m->Name;
+				$familyTree["grandmother_m_id"] = $grandmother_m->ID;
+				$familyTree["grandfather_m"] = $grandfather_m->Name; 
+				$familyTree["grandfather_m_id"] = $grandfather_m->ID;
+			}
+			
+			$fatterlitter = $father->parentLitter();
+			if($fatterlitter != null){
+				$grandmother_f = GuineaPig::find($fatterlitter->IDMotherGP);
+				$grandfather_f = GuineaPig::find($fatterlitter->IDFatherGP);
+				$familyTree["grandmother_f"] = $grandmother_f->Name;
+				$familyTree["grandmother_f_id"] = $grandmother_f->ID;
+				$familyTree["grandfather_f"] = $grandfather_f->Name; 
+				$familyTree["grandfather_f_id"] = $grandfather_f->ID;
+			}
+		}	
+		return $familyTree;
+			
+	}
 	
 	public function containsGenPair($genpair){
 		return strpos($this->color, $genpair) || strpos($this->race, $genpair);
@@ -55,6 +99,11 @@ class GuineaPig extends Model {
 		{
 			return $this->weighings()->first()->Weight;
 		}
+	}
+	
+	public function getFormattedBirthdate(){
+		$date = new DateTime($this->BirthDate);
+		echo $date->format('d.m.Y');
 	}
 	
 	public function getAge(){
@@ -76,58 +125,37 @@ class GuineaPig extends Model {
 			return $this->hasMany('App\Litter', 'IDFatherGP', 'ID')->orderBy('ID', 'desc');
 		}
 	}
-
 		
 	public function currentLitter(){
-		$currentLitter = $this->childLitters()->where('expectedLitterDate', '>=', date('Y-m-d', time()))->first();
-				
+		$currentLitter = $this->childLitters()->where('LitterStatus', '=', 'unbekannt')->first();
 		return $currentLitter;
 	}
 	
 	public function isInCalf(){
 		return ($this->currentLitter() != null and $this->Sexe == 1);
 	}
-/*	
-	public function getRaceParts(){
-		return $this->getParts($this->Race);
-	}
-	
-	public function getColorParts(){
-		return $this->getParts($this->Color);
-	}
-	*/
-	
-	/*
-	public function getGP(){
-		$GP = array();
-		$GP["race"] = $this->Race;
-		$GP["color"] = $this->Color;
-		$GP["age"] = $this->getAge();
-		
-		return $GP;
-	}*/
  
 	// Methods
     public function getValidator() {
         return Validator::make(
             array(
-                'name' =>            $this->name,
+                'Name' =>            $this->Name,
                 'breedingabbr' =>    $this->breedingabbr,
 				'birthdate' => date('d.m.Y', strtotime($this->BirthDate)),
-				'color' => $this->Color,
+				'Color' => $this->Color,
                 'race' =>  $this->Race,
-				'sexe' => $this->sexe,
+				'Sexe' => $this->Sexe,
 				'dateofdeath' => date('d.m.Y', strtotime($this->DateOfDeath)),
                 'image' => $this->image
             ),
             array(
-                'name' =>              'required|between:2,150',
+                'Name' =>         'required|between:2,150',
 				'breedingabbr' => 'between:2,50',
 				'dateofdeath' => array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
                 'birthdate' => array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
-				'color' => 'required|between: 0,255',
+				'Color' => 'required|between: 0,255',
 				'race' => 'required|between: 0,255',
-                'sexe' =>    'required|numeric',
+                'Sexe' =>    'required|numeric',
                 'image' => 'between:0,500'
             )
         );

@@ -20,13 +20,6 @@ class Weight extends Model {
      */
     protected $fillable = ['id_guineapig', 'Weight', 'DateOfWeighing'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
-
 
     // Relations
     public function guineapig() {
@@ -42,7 +35,7 @@ class Weight extends Model {
             ),
             array(
                 'Weight' => 'required|numeric',
-                'DateOfWeighing' => 'required|date_format:Y-m-d'
+                'DateOfWeighing' => 'required|date_format:d.m.Y'
             )
         );
     }

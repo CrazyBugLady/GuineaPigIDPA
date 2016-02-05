@@ -14,7 +14,13 @@ use DB;
 class vwLitterController extends ControllerShared {
 	public static function index() {
 		$breedings = self::getLoggedInUser()->breedings;
-		return View::make('litters')->with(array("breedings" => $breedings));
+		return View::make('litters')->with(array("breedings" => $breedings, "show" => false, 'idlitter' => 0));
+	}
+	
+	public static function form(){
+		$idlitter = Route::input("id");
+		$breedings = self::getLoggedInUser()->breedings;
+		return View::make('litters')->with(array("breedings" => $breedings, "show" => true, 'idlitter' => $idlitter));	
 	}
 	
 	public static function create(){	
@@ -27,6 +33,7 @@ class vwLitterController extends ControllerShared {
 			
 			return View::make('litters.create',
 				array(
+					'breeding' => $breeding,
 					'weibchen' => $weibchen,
 					'maennchen' => $maennchen
 				)
@@ -49,10 +56,21 @@ class vwLitterController extends ControllerShared {
 	
 	// TODO: Format => 50% Color
 	// TODO: Format => 50% Race
-
+	
 	public static function generatePossibleLitter(Request $request){
-		$maennchen = GuineaPig::find(Input::get("idM"));
-		$weibchen = GuineaPig::find(Input::get("idW"));
+		$maennchen = "";
+		$weibchen = "";
+		
+		if(Input::get("litter") != "nothing"){
+			$litter = Litter::find(Input::get("litter")); 
+			$maennchen = $litter->FatherGuineaPig()->first();
+			$weibchen = $litter->MotherGuineaPig()->first();
+		}	
+		else{
+			$maennchen = GuineaPig::find(Input::get("idM"));
+			$weibchen = GuineaPig::find(Input::get("idW"));			
+		}
+		
 		$information = Input::get("information");
 
 		if($information == "color")
@@ -109,9 +127,17 @@ class vwLitterController extends ControllerShared {
 			array_push($PartProperty, $CombinationFour);
 			
 			foreach($PartProperty as $CombinationKey => $Combination){
+				if((strlen($Combination) == 2 || strlen($Combination) == 3) && substr($Combination,0,1) == '?'){
+					$PartProperty[$CombinationKey] = substr($Combination, -(strlen($Combination) - 1)) . substr($Combination, -(strlen($Combination) - 1));
+				}
+				if((strlen($Combination) == 2 || strlen($Combination) == 3) && substr($Combination,-1) == '?'){
+					$PartProperty[$CombinationKey] = substr($Combination, 0,(strlen($Combination) - 1)) . substr($Combination, 0,(strlen($Combination) - 1));
+				}
+				
 				if((preg_match('/[A-Z][a-z]/', $Combination) or preg_match('/[a-z][A-Z]/', $Combination)) and strlen($Combination) < 3){
 					$PartProperty[$CombinationKey] = strtoupper($Combination);
 				}				
+				
 				if(preg_match('/[a-z]{2}[A-Z]{1}[a-z]{1}/', $Combination) and strlen($Combination) == 4 and ctype_upper(substr($Combination, 0, 1)) == false){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
 					if($Combination == "rnRn")
 					{
@@ -133,6 +159,21 @@ class vwLitterController extends ControllerShared {
 				if(preg_match('/[A-Z]{1}[a-z]{2}/', $Combination) and strlen($Combination) == 3){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
 					$PartProperty[$CombinationKey] = substr($Combination, 0, 1) . substr($Combination, 0, 1);//. substr($Combination, 0, 2);
 				}
+				
+				/*if(preg_match('/[a-z]{2}[A-Z]{1}/', $Combination) and strlen($Combination) == 3){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
+					$PartProperty[$CombinationKey] = substr($Combination, -1) . substr($Combination, -1);//. substr($Combination, 0, 2);
+				}
+				if(preg_match('/[A-Z][a-z]{2}?{1}/', $Combination) and strlen($Combination) == 3){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
+					//$PartProperty[$CombinationKey] = substr($Combination, 0, 1) . substr($Combination, 0, 1);//. substr($Combination, 0, 2);
+				}
+				if(preg_match('/?{1}[A-Z][a-z]{2}/', $Combination) and strlen($Combination) == 3){ // wir wollen keine Wiederholungen berücksichtigen, da diese das Ergebnis verunschönen
+					//$PartProperty[$CombinationKey] = substr($Combination, 0, 1) . substr($Combination, 0, 1);//. substr($Combination, 0, 2);
+				}*/
+				
+				// TODO berücksichtige Fall ?sn
+				// TODO: berücksichtige Fall sn?
+				// TODO: berücksichtige Fall M?
+				// TODO: berücksichtige Fall ?M
 			}
 			array_push($Combinations, $PartProperty);//array_count_values($PartProperty));
 

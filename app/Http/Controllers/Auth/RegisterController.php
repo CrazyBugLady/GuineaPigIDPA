@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request;
 use View, Input, Redirect, Route, Validator;
 use App\User;
+use DateTime;
 
 class RegisterController extends Controller
 {	
@@ -30,10 +31,12 @@ class RegisterController extends Controller
 	
 	protected function validator(array $data)
     {
+		$Birthdate = new DateTime($data["tbBirthdate"]);
+		
         return Validator::make(array(
 				'firstname' => $data["tbFirstname"],
 				'lastname' => $data["tbLastname"],
-				'birthdate' => $data["tbBirthdate"],
+				'birthdate' => $Birthdate->format('d.m.Y'),
 				'email' => $data["tbEmail"],
 				'password' => $data["tbPassword"],
 				'password_confirmation' => $data["tbPassword_confirmation"]
@@ -41,7 +44,7 @@ class RegisterController extends Controller
 			[
 				'firstname' => 'required|max:45',
 				'lastname' => 'required|max:45',
-				'birthdate' => array('required', 'regex:/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}$/'),
+				'birthdate' => 'required|date_format:d.m.Y',
 				'email' => 'required|email|max:255|unique:users',
 				'password' => 'required|confirmed|min:6',
 			]);

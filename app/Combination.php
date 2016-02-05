@@ -18,14 +18,7 @@ class Combination extends Model {
      *
      * @var array
      */
-    protected $fillable = ['ID', 'Name', 'CombinationType', 'Description', 'ImageUrl', 'created_at', 'updated_at'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = ['ID', 'Name', 'CombinationType', 'showDescription', 'Description', 'Code', 'CombinationGroup', 'ImageUrl', 'created_at', 'updated_at'];
 
 
     // Relations
@@ -39,5 +32,5 @@ class Combination extends Model {
 			return $this->hasMany('App\Color', 'ID', 'ID')->orderBy('ColorCode', 'desc');
 		}
     }
-    
+	
 }
